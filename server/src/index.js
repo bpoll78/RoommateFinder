@@ -49,7 +49,11 @@ app.use('/api/matches', matchRoutes);
 app.use('/api/users', userRoutes);
 
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to Roommate Finder API' });
+  res.json({ 
+    message: 'Welcome to Roommate Finder API',
+    status: 'healthy',
+    environment: process.env.NODE_ENV
+  });
 });
 
 // Error handling middleware
@@ -58,7 +62,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Something went wrong!' });
 });
 
-const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => {
+const PORT = process.env.PORT || 10000;
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}`);
 }); 
