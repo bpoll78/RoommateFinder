@@ -14,6 +14,8 @@ const allowedOrigins = [
   'http://localhost:5173',  // Development
   'http://localhost:5174',  // Development alternative port
   process.env.CLIENT_URL,   // Production
+  'https://roommate-finder-bpoll78.vercel.app',  // Vercel deployment
+  'https://roommate-finder.vercel.app'  // Alternative Vercel domain
 ];
 
 app.use(cors({
@@ -62,7 +64,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Something went wrong!' });
 });
 
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}`);
 }); 
