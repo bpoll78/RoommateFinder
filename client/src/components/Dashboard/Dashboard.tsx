@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
   Box,
-  Container,
   Typography,
   CircularProgress,
   Snackbar,
@@ -13,8 +12,6 @@ import {
   ListItemIcon,
   ListItemText,
   IconButton,
-  Tabs,
-  Tab,
   useTheme,
   useMediaQuery,
   ListItemButton,

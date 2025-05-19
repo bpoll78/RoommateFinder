@@ -5,7 +5,6 @@ import {
   Typography,
   TextField,
   Button,
-  Grid,
   Slider,
   FormControlLabel,
   Switch,
@@ -130,9 +129,9 @@ const ProfileEdit = () => {
       </Typography>
 
       <form onSubmit={handleSubmit}>
-        <Grid container spacing={3}>
+        <Box sx={{ display: 'grid', gap: 3, gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' } }}>
           {/* Profile Images */}
-          <Grid item xs={12}>
+          <Box sx={{ gridColumn: '1 / -1' }}>
             <Typography variant="h6" gutterBottom>
               Profile Images
             </Typography>
@@ -159,10 +158,10 @@ const ProfileEdit = () => {
                 <PhotoCamera />
               </IconButton>
             </Stack>
-          </Grid>
+          </Box>
 
           {/* Basic Information */}
-          <Grid item xs={12} sm={6}>
+          <Box>
             <TextField
               fullWidth
               label="Name"
@@ -170,8 +169,8 @@ const ProfileEdit = () => {
               value={profile.name}
               onChange={handleInputChange}
             />
-          </Grid>
-          <Grid item xs={12} sm={6}>
+          </Box>
+          <Box>
             <TextField
               fullWidth
               label="Email"
@@ -180,17 +179,22 @@ const ProfileEdit = () => {
               onChange={handleInputChange}
               disabled
             />
-          </Grid>
-          <Grid item xs={12}>
+          </Box>
+          <Box sx={{ gridColumn: '1 / -1' }}>
             <TextField
               fullWidth
               label="University"
               name="university"
               value={profile.university}
               onChange={handleInputChange}
-            />
-          </Grid>
-          <Grid item xs={12}>
+              select
+            >
+              <MenuItem value="University of Guelph">University of Guelph</MenuItem>
+              <MenuItem value="University of Waterloo">University of Waterloo</MenuItem>
+              <MenuItem value="Western University">Western University</MenuItem>
+            </TextField>
+          </Box>
+          <Box sx={{ gridColumn: '1 / -1' }}>
             <TextField
               fullWidth
               label="Bio"
@@ -200,15 +204,15 @@ const ProfileEdit = () => {
               multiline
               rows={4}
             />
-          </Grid>
+          </Box>
 
           {/* Preferences */}
-          <Grid item xs={12}>
+          <Box sx={{ gridColumn: '1 / -1' }}>
             <Typography variant="h6" gutterBottom>
               Preferences
             </Typography>
-          </Grid>
-          <Grid item xs={12} sm={6}>
+          </Box>
+          <Box>
             <Typography gutterBottom>Cleanliness Level</Typography>
             <Slider
               value={profile.preferences.cleanliness}
@@ -218,8 +222,8 @@ const ProfileEdit = () => {
               marks
               valueLabelDisplay="auto"
             />
-          </Grid>
-          <Grid item xs={12} sm={6}>
+          </Box>
+          <Box>
             <Typography gutterBottom>Noise Level Tolerance</Typography>
             <Slider
               value={profile.preferences.noise}
@@ -229,8 +233,8 @@ const ProfileEdit = () => {
               marks
               valueLabelDisplay="auto"
             />
-          </Grid>
-          <Grid item xs={12} sm={6}>
+          </Box>
+          <Box>
             <TextField
               select
               fullWidth
@@ -242,8 +246,8 @@ const ProfileEdit = () => {
               <MenuItem value="night">Night Owl</MenuItem>
               <MenuItem value="flexible">Flexible</MenuItem>
             </TextField>
-          </Grid>
-          <Grid item xs={12} sm={6}>
+          </Box>
+          <Box>
             <FormControlLabel
               control={
                 <Switch
@@ -262,29 +266,25 @@ const ProfileEdit = () => {
               }
               label="Pet Friendly"
             />
-          </Grid>
-        </Grid>
-
-        <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            disabled={loading}
-          >
-            {loading ? 'Saving...' : 'Save Changes'}
-          </Button>
+          </Box>
+          <Box sx={{ gridColumn: '1 / -1' }}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              disabled={loading}
+              fullWidth
+            >
+              {loading ? 'Updating...' : 'Update Profile'}
+            </Button>
+            {message && (
+              <Typography color={message.includes('Error') ? 'error' : 'success'} sx={{ mt: 2 }}>
+                {message}
+              </Typography>
+            )}
+          </Box>
         </Box>
       </form>
-
-      {message && (
-        <Typography
-          color={message.includes('Error') ? 'error' : 'success'}
-          sx={{ mt: 2, textAlign: 'center' }}
-        >
-          {message}
-        </Typography>
-      )}
     </Paper>
   );
 };

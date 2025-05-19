@@ -8,7 +8,6 @@ import {
   Box,
   Rating,
   Chip,
-  Avatar,
 } from '@mui/material';
 import { Person, CheckCircle, Cancel } from '@mui/icons-material';
 
